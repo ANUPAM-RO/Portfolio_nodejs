@@ -1,0 +1,56 @@
+
+<html>
+<head>
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding: 5px;
+  margin: 50px;
+}
+
+.grid-item {
+  background-color: rgba(235, 232, 232, 0.952);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding:5px;
+  font-size: 15px;
+  text-align: center;
+}
+img{
+  width:80px;
+  height: 50px;
+  margin-right: 180px;
+}
+</style>
+</head>
+<body>
+  
+<a href="/add"><button>Add Project</button></a>
+
+
+<div class="grid-container">
+  <div class="grid-item">
+      <img src="images/School.jpeg" />
+  </div>
+  <div class="grid-item">
+  <p>Id</p>
+  </div>
+  <div class="grid-item">
+    <p>Title</p>
+  </div>  
+  <div class="grid-item">
+    <p>Service</p>
+  </div>
+  <div class="grid-item">
+    <a href="/edit"><button style= "width:80px ;height: 35px ; background-color:red">EDIT</button></a>
+    <button style= "width:80px ;height: 35px; background-color: yellow"  onclick="forDel()">DELETE</button>
+  </div>
+</div> 
+<a href="/"> <button class="btn-3">Homepage</button></a>   
+<script>
+  const forDel = ()=>{
+    alert("Project delete successfuly");
+  }
+</script>        
+    </body>
+</html>
