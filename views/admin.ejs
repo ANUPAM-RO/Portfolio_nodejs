@@ -1,56 +1,117 @@
-
 <html>
 <head>
 <style>
-.grid-container {
+.grid-container{
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-areas: 
+        "sidebar header"
+        "sidebar main"
+        "sidebar footer";
+  grid-gap: 2rem;
+}
+.header {
+  grid-area: header;
+}
+
+.main {
+  grid-column: main;
+}
+
+.sidebar {
+  grid-row: sidebar;
+}
+
+.footer {
+  grid-column: footer;
+}
+.main{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   padding: 5px;
-  margin: 50px;
+  margin: 10px;
 }
 
 .grid-item {
   background-color: rgba(235, 232, 232, 0.952);
-  border: 1px solid rgba(0, 0, 0, 0.8);
+  /* border: 1px solid rgba(0, 0, 0, 0.8); */
   padding:5px;
   font-size: 15px;
   text-align: center;
 }
 img{
-  width:80px;
-  height: 50px;
+  width: 80px;
+  height: 40px;
   margin-right: 180px;
+}
+.grid-head{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  padding: 5px;
+  margin: 10px;
+  text-align: center;
 }
 </style>
 </head>
 <body>
-  
+ 
+  <div class="grid-container">
+  <div class="sidebar">
+    <%- include('common/sidebar') %>
+ </div>
+<div class ="header">
+   <%- include('common/header') %> 
+</div>
+<br>
 <a href="/add"><button>Add Project</button></a>
+<div class="grid-head">
+  <div class="div">
 
+  </div>
+  <div class="div">
+    Title
+  </div>
+  <div class="div">
+    Service
+  </div>
+  <div class="div">
+    Client
+  </div>
+  <div class="div"></div>
+</div>
+  <% data.forEach(function(i) { %> 
 
-<div class="grid-container">
+<div class="main" >
+  
   <div class="grid-item">
-      <img src="images/School.jpeg" />
+    <img src='images/<%= i.image %>' alt="">
   </div>
   <div class="grid-item">
-  <p>Id</p>
+  <p><%= i.id %></p>
   </div>
   <div class="grid-item">
-    <p>Title</p>
+    <p><%= i.title %></p>
   </div>  
   <div class="grid-item">
-    <p>Service</p>
+    <p><%= i.service %></p>
   </div>
+
   <div class="grid-item">
-    <a href="/edit"><button style= "width:80px ;height: 35px ; background-color:red">EDIT</button></a>
-    <button style= "width:80px ;height: 35px; background-color: yellow"  onclick="forDel()">DELETE</button>
+    <a href="/project/edit/<%= i.id %>"><button style= "width:80px ;height: 35px ; background-color:red">EDIT</button></a>
+    <a href="/delete?id = <%= rs.id %>"><button style= "width:80px ;height: 35px; background-color: yellow">DELETE</button></a>
   </div>
 </div> 
-<a href="/"> <button class="btn-3">Homepage</button></a>   
-<script>
+
+<% }) %>
+<div class ="footer">
+  <br>
+  <a href="/"> <button class="btn-3">Homepage</button></a>   
+  </div>
+</div>
+<!-- <script>
   const forDel = ()=>{
     alert("Project delete successfuly");
   }
-</script>        
+</script>         -->
     </body>
 </html>

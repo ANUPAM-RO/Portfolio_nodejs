@@ -2,27 +2,30 @@
     <body>
         <a href="/admin"><button class="btn">Go back</button></a>
         <h2>Add Project</h2>
-        <form action="/project/add" method="post">
+        <form action="/project/add" method="POST">
 
-            <label for="title">Title</label><br>
+            <label for="id">Id:</label><br>
+            <input type="text" id="id" name="id"><br><br>
+
+            <label for="title">Title:</label><br>
             <input type="text" id="title" name="title"><br><br>
 
 
-            <label for="service">Service</label><br>
+            <label for="service">Service:</label><br>
             <input type="text" id="service" name="service"><br><br>
 
-            <label for="lname" >client</label><br>
+            <label for="client" >Client:</label><br>
             <input type="text" id="client" name="client"><br><br>
 
-            <label for="lname">Description</label><br>
+            <label for="desc">Description:</label><br>
             <textarea class="form-control" rows="3" name="desc" ></textarea><br><br>
 
-            <label for="lname">Project date</label><br>
+            <label for="date">Project date:</label><br>
             <input type="date" id="date" name="date"><br><br>
 
-            <label for="date">image</label><br>
+            <label for="image">Image:</label><br>
 
-            <input class="form-control form-control-sm" id="file" type="file" name="file"><br><br>
+            <input class="form-control form-control-sm" id="image" type="file" name="image"><br><br>
 
             <input type="submit" name="submit">
           </form>
