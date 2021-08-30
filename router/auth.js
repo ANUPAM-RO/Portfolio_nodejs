@@ -10,8 +10,6 @@ const router = express.Router();
   router.get('/add',function(req,res){
       res.render("add")
   });
-  router.get('/project/edit/:id',function(req,res){
-      res.render("edit")
-  });
+
 
 module.exports = router;

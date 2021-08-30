@@ -1,5 +1,9 @@
 <html>
 <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin</title>
 <style>
 .grid-container{
     display: grid;
@@ -28,6 +32,7 @@
 .main{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-row-gap: 2rem;
   padding: 5px;
   margin: 10px;
 }
@@ -45,6 +50,7 @@ img{
   margin-right: 180px;
 }
 .grid-head{
+  grid-column: 1/6;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   padding: 5px;
@@ -53,36 +59,35 @@ img{
 }
 </style>
 </head>
+
 <body>
  
-  <div class="grid-container">
+<div class="grid-container">
   <div class="sidebar">
     <%- include('common/sidebar') %>
  </div>
-<div class ="header">
+  <div class ="header">
    <%- include('common/header') %> 
-</div>
-<br>
-<a href="/add"><button>Add Project</button></a>
-<div class="grid-head">
-  <div class="div">
-
   </div>
-  <div class="div">
-    Title
-  </div>
-  <div class="div">
-    Service
-  </div>
-  <div class="div">
-    Client
-  </div>
-  <div class="div"></div>
-</div>
-  <% data.forEach(function(i) { %> 
-
 <div class="main" >
+
+  <div class="grid-head">
+    <div class="div">
+      <a href="/add"><button class="btn btn-primary">Add Project</button></a>
+    </div>
+    <div class="div">
+      Id
+    </div>
+    <div class="div">
+      Service
+    </div>
+    <div class="div">
+      Client
+    </div>
+    <div class="div"></div>
+  </div>
   
+  <% data.forEach(function(i) { %> 
   <div class="grid-item">
     <img src='images/<%= i.image %>' alt="">
   </div>
@@ -97,17 +102,16 @@ img{
   </div>
 
   <div class="grid-item">
-    <a href="/project/edit/<%= i.id %>"><button style= "width:80px ;height: 35px ; background-color:red">EDIT</button></a>
-    <a href="/delete?id = <%= rs.id %>"><button style= "width:80px ;height: 35px; background-color: yellow">DELETE</button></a>
+    <a href="/project/edit/<%= i.id %>"><button class="btn btn-warning">EDIT</button></a>
+    <a href="/delete/<%= i.id %>" onClick=" return confirm ('Are you sure you?')"><button class="btn btn-danger">DELETE</button></a>
   </div>
+  <% }) %>
 </div> 
 
-<% }) %>
-<div class ="footer">
-  <br>
-  <a href="/"> <button class="btn-3">Homepage</button></a>   
-  </div>
-</div>
+<div class ="footer mb-3">
+  <a href="/"> <button class="btn btn-info">Homepage</button></a>   
+ </div>
+
 <!-- <script>
   const forDel = ()=>{
     alert("Project delete successfuly");

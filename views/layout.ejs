@@ -1,68 +1,59 @@
-<html>
-<head>
 <style>
-  .grid-container{
-    display: grid;
-    grid-template-columns: 200px 1fr;
-    grid-template-areas: 
-        "sidebar header"
-        "sidebar main"
-        "sidebar footer";
-  grid-gap: 2rem;
-}
-.header {
-  grid-area: header;
-}
+    .grid-container {
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        grid-template-areas:
+            "sidebar header"
+            "sidebar main"
+            "sidebar footer";
+        grid-gap: 2rem;
+    }
+    .header {
+        grid-area: header;
+    }
 
-.main {
-  grid-column: main;
-}
+    .main {
+        grid-column: main;
+    }
 
-.sidebar {
-  grid-row: sidebar;
-}
+    .sidebar {
+        grid-row: sidebar;
+    }
 
-.footer {
-  grid-column: footer;
-}
- 
-  .card{
-    margin-top: 20px;
-    height:220px;
-    padding: 10px;
-  }
-  .card-img{
-    height: 100px;
-  }
-.main{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-}
+    .footer {
+        grid-column: footer;
+    }
+
+    .card {
+        margin-top: 20px;
+        height: 220px;
+        padding: 10px;
+    }
+    .card-img {
+        height: 100px;
+    }
+    .main {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
 </style>
-</head>
-<body>
 
 <div class="grid-container">
- <div class="sidebar">
-           <%- include('common/sidebar') %>
+    <div class="sidebar"><%- include('common/sidebar') %></div>
+    <div class="header"><%- include('common/header') %></div>
+
+    <div class="main">
+        <% data.forEach(function(i) { %>
+        <div class="card" style="width: 15rem">
+            <a href="/project/<%= i.id %>"
+                ><img src="images/<%= i.image %>" class="card-img" alt=""
+            /></a>
+            <p>My project Title is : <%= i.title %></p>
+            <p>My project Client is : <%= i.client %></p>
         </div>
- <div class ="header">
-          <%- include('common/header') %> 
-      </div>
-      
-<div class ="main">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-  <% data.forEach(function(i) { %> 
-  <div class="card" style="width: 15rem;">
-    <a href="/project/:id"><img src="images/<%= i.image %>"  class="card-img" alt=""></a>
-    <p>My project Title is : <%= i.title %></p>
-    <p>My project Client is : <%= i.client %></p>
-  </div>
-  <% }) %> 
-  </div>
-  <div class ="footer">
-    <br>
-  <a href="/admin">Admin</a>
+        <% }) %>
     </div>
-</body>
-</html>
+    <div class="footer">
+        <a href="/admin" class="btn btn-primary">Admin</a>
+    </div>
+</div>

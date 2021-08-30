@@ -32,25 +32,15 @@ app.use(require('./router/auth'));
 // app.get('/',function(req,res){
 //     res.render("home")
 // });
+// Add a project
 app.post('/project/add',function(req,res){
-  console.log(req.body)
+  // console.log(req.body)
   db.serialize(() => {
   db.each(`insert into posts values ('${req.body.id}','${req.body.title}','${req.body.service}','${req.body.client}','${req.body.desc}','${req.body.date}','${req.body.image}')`);
   });
-  res.render('admin');
+  res.redirect('/admin');
 });
 
-app.post('/project/edit',function(req,res){
-  console.log(req.body)
-  db.serialize(() => {
-  db.run(`update posts set title = '${req.body.title}', service = '${req.body.service}',client = '${req.body.client}',description = '${req.body.desc}', project_date = '${req.body.date}', image = '${req.body.image}'  where id = '${req.body.id}'`,(err,result)=>{
-    if (err) throw err; 
-
- });
- res.render('admin',{data: result});
-  });
-  
-});
 app.get('/admin',function(req,res){
   db.serialize(() => {
     db.all(`select image, id , title, service from posts`,(err,result)=>{
@@ -59,50 +49,66 @@ app.get('/admin',function(req,res){
       const arr = [];
       result.forEach((row) => {
         arr.push(row);
-
-    })
-    console.log(arr)
+        
+      })
+      // console.log(arr)
       res.render('admin',{data: arr});
     });
-    });    
+  });    
 });
+
 app.get('/',function(req,res){
   db.serialize(() => {
-    db.all(`select image, title, client from posts`,(err,result)=>{
+    db.all(`select image, title, id, client from posts`,(err,result)=>{
       if(err) throw err;
       // console.log(result)
       const arr = [];
       result.forEach((row) => {
         arr.push(row);
-
-    })
-    console.log(arr)
+        
+      })
+      // console.log(arr)
       res.render('home',{data: arr});
     });
-    });    
+  });    
 });
 
 app.get('/project/:id',function(req,res){
-  db.serialize(() => {
-    db.all(`select image from posts where id = '${req.body.id}'`,(err,result)=>{
+    db.get("select * from posts where id = ?",req.params.id,(err,result)=>{
       if(err) throw err;
-      // console.log(result)
-      const arr = [];
-      result.forEach((row) => {
-        arr.push(row);
-
-    })
-    console.log(arr)
-      res.render('projects',{data: arr});
-    });
-    });    
+      // const arr = [];
+      // result.forEach((row) => {
+      //   arr.push(row);
+      console.log(result);
+      res.render('projects',{data: result});
 });
-app.get('/delete',function(req, res){
-db.all(`DELETE FROM posts WHERE id='${req.body.id}`,req.body.id,(err,rs)=> {
+    });
+    //Edit a Project
+      app.get('/project/edit/:id',function(req,res){
+      id = req.params.id;
+      const sql = "SELECT * FROM posts WHERE id = ?";
+      db.get(sql, id, (err, row) => {
+        res.render("edit", { data: row });
+      });
+    });  
+    
+
+app.post('/project/edit/:id',function(req,res){
+
+  const post_id = req.params.id;
+  const post = [req.body.title, req.body.service,req.body.client,req.body.desc,req.body.date,req.body.image , post_id];
+  db.run("update posts set title = ?, service = ?,client = ?,description = ?, project_date = ?, image = ?  where (id = ?)",post,(err)=>{
+    if (err) throw err; 
+    res.redirect('/admin');
+
+ });
+  });
+//Delete a project
+app.get('/delete/:id',function(req, res){
+db.run(`DELETE FROM posts WHERE id  = ?`,req.params.id,(err,rs)=> {
   if (err) throw err;
-  else{
-    res.redirect('admin',{data: rs});
-  }
+ res.redirect('/admin');
+  
 });
 });
 app.listen(4000);

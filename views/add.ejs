@@ -1,33 +1,72 @@
 <html>
-    <body>
-        <a href="/admin"><button class="btn">Go back</button></a>
-        <h2>Add Project</h2>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+        crossorigin="anonymous"
+    />
+    <body class="container">
+        <a href="/admin"
+            ><button class="btn btn-primary mt-3">Go back</button></a
+        >
+
+        <p class="my-2 text-xl-center fs-1">Add Project</p>
+
         <form action="/project/add" method="POST">
+            <label for="id">Id:</label><br />
+            <input
+                type="text"
+                id="id"
+                name="id"
+                class="form-control form-control-sm w-25"
+            /><br /><br />
 
-            <label for="id">Id:</label><br>
-            <input type="text" id="id" name="id"><br><br>
+            <label for="title">Title:</label><br />
+            <input
+                type="text"
+                id="title"
+                name="title"
+                class="form-control form-control-sm w-25"
+            /><br /><br />
 
-            <label for="title">Title:</label><br>
-            <input type="text" id="title" name="title"><br><br>
+            <label for="service">Service:</label><br />
+            <input
+                type="text"
+                id="service"
+                name="service"
+                class="form-control form-control-sm w-25"
+            /><br /><br />
 
+            <label for="client">Client:</label><br />
+            <input
+                type="text"
+                id="client"
+                name="client"
+                class="form-control form-control-sm w-25"
+            /><br /><br />
 
-            <label for="service">Service:</label><br>
-            <input type="text" id="service" name="service"><br><br>
+            <label for="desc">Description:</label><br />
+            <textarea
+                class="form-control"
+                rows="3"
+                name="desc"
+                class="form-control form-control-sm w-25"
+            ></textarea
+            ><br /><br />
 
-            <label for="client" >Client:</label><br>
-            <input type="text" id="client" name="client"><br><br>
+            <label for="date">Project date:</label><br />
+            <input type="date" id="date" name="date" /><br /><br />
 
-            <label for="desc">Description:</label><br>
-            <textarea class="form-control" rows="3" name="desc" ></textarea><br><br>
+            <label for="image">Image:</label><br />
 
-            <label for="date">Project date:</label><br>
-            <input type="date" id="date" name="date"><br><br>
+            <input
+                class="form-control form-control-sm w-25"
+                id="image"
+                type="file"
+                name="image"
+            /><br /><br />
 
-            <label for="image">Image:</label><br>
-
-            <input class="form-control form-control-sm" id="image" type="file" name="image"><br><br>
-
-            <input type="submit" name="submit">
-          </form>
+            <input type="submit" class="btn btn-success" name="submit" />
+        </form>
     </body>
 </html>
